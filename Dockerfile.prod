@@ -1,0 +1,29 @@
+# Stage 1: Build the React app
+FROM node:16 AS builder
+WORKDIR /app
+
+# Copy package.json and package-lock.json first for better caching
+COPY package*.json ./
+RUN npm install --force
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the React app
+RUN npm run build
+
+# Stage 2: Serve the app using serve
+FROM node:20
+WORKDIR /app
+
+# Copy the build output from the builder stage
+COPY --from=builder /app/dist ./build
+
+# Install serve globally to serve static files
+RUN npm install -g serve
+
+# Expose the port that your app runs on
+EXPOSE 3500
+
+# Use JSON array syntax for CMD to run serve
+CMD ["serve", "-s", "build", "-l", "3500", "--single"]
