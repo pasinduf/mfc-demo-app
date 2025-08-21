@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import Logo from '../images/logo/logo.svg';
+import Cover from '../images/logo/cover.png';
 import { useAuth } from '../hooks/useAuth';
 import { QueueListIcon ,HomeIcon, Squares2X2Icon,AdjustmentsHorizontalIcon,UserGroupIcon,CurrencyDollarIcon,UserCircleIcon,DocumentChartBarIcon,FolderPlusIcon } from '@heroicons/react/24/solid';
 import { Add_Bulk_Payment, Collector_Dashboard, Main_Dashboard, Reports_Menu, View_Branch, View_Center, View_Loan, View_Loan_Product, View_Member, View_User } from '../api/RBAC/userAccess';
@@ -74,7 +74,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <NavLink to="/">
-          <img src={Logo} alt="Logo" />
+          <img src={Cover} alt="Logo" />
         </NavLink>
 
         <button
