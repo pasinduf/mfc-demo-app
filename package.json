@@ -1,5 +1,5 @@
 {
-  "name": "premium-credit-dashboard",
+  "name": "mfc-app-dashboard",
   "private": true,
   "version": "1.0.5",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "author": {
-    "name": "premium-credit-dashboard"
+    "name": "mfc-app-dashboard"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",

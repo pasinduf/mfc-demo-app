@@ -11,9 +11,8 @@ import { tokenRepository } from '../../api';
 import { getFilterBranches } from '../../api/filters/getFilterBranches';
 import { getFilterCenters } from '../../api/filters/getFilterCenters';
 import { useAppStore } from '../../hooks/useAppStore';
-import Logo from '../../images/logo/cover.svg';
+import Logo from '../../images/logo/logo.png';
 import { getAccessList } from '../../api/auth/access/getAccessList';
-import { userRole } from '../../api/RBAC/RBAC';
 import { COLLECTION_OFFICER } from '../../api/RBAC/userRoles';
 
 const SignIn = () => {
