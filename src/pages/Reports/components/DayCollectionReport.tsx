@@ -140,7 +140,7 @@ const DayCollectionReport = () => {
             type="date"
             name="fromDate"
             value={fromDate}
-            className="custom-input-date custom-input-date-1 w-full rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            className="custom-input-date custom-input-date-1 w-full rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
             onKeyDown={(e) => {
               e.preventDefault();
             }}
@@ -173,7 +173,7 @@ const DayCollectionReport = () => {
           name="toDate"
           value={toDate}
           disabled={!isDateRange}
-          className="custom-input-date custom-input-date-2 w-full rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          className="custom-input-date custom-input-date-2 w-full rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
           onKeyDown={(e) => {
             e.preventDefault();
           }}
@@ -200,7 +200,7 @@ const DayCollectionReport = () => {
               width: '220px',
               height: '45px',
             }}
-            className="relative z-20 inline-flex appearance-none   pl-3 pr-8 text-black text-md  rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            className="relative z-20 inline-flex appearance-none   pl-3 pr-8 text-black text-md  rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
           >
             <option value="">Select Center</option>
             {centerOptions.map((center: any, index: number) => {

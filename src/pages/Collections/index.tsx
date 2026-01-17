@@ -189,138 +189,128 @@ const Collections = () => {
   return (
     <>
       <Breadcrumb pageName="Collections" />
+
       <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7.5">
-        <div className="col-span-12 xl:col-span-12">
-          <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-3 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-4 xl:col-span-8 py-4">
-        
+        <div className="col-span-12">
+          <div className="rounded-sm border border-stroke bg-white px-4 py-4 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-5">
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col sm:flex-row gap-3 sm:items-center flex-wrap">
+                <div className="relative w-full sm:w-[220px]">
+                  <select
+                    value={selectedDateType}
+                    onChange={onSelectDateOption}
+                    className="w-full appearance-none py-2 pl-3 pr-8 text-md rounded border-2 border-stroke bg-transparent font-medium outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input"
+                  >
+                    {dateTypes.map((type, i) => (
+                      <option key={i} value={type.value}>
+                        {type.name}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDownIcon className="w-5 absolute top-1/2 right-3 -translate-y-1/2" />
+                </div>
 
-            <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4 mt-1 flex-wrap">
-              {/* Select dropdown */}
-              <div className="relative inline-block w-full sm:w-[120px]">
-                <select
-                  name="dateTypes"
-                  id="dateTypes"
-                  value={selectedDateType}
-                  onChange={onSelectDateOption}
-                  className="relative z-20 inline-flex w-full appearance-none py-2 pl-3 pr-8 text-black text-md rounded border-[2px] border-stroke bg-transparent font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                >
-                  <option value="">Select Option</option>
-                  {dateTypes.map((type, index) => (
-                    <option key={`center-${index}`} value={type.value}>
-                      {type.name}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDownIcon className="w-5 absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer" />
+                {selectedDateType === 6 && (
+                  <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                    <input
+                      type="date"
+                      value={fromDate}
+                      max={today}
+                      onKeyDown={(e) => e.preventDefault()}
+                      onChange={(e) => {
+                        const dt = e.target.value;
+                        if (dt) {
+                          setFromDate(dt);
+                          setFilter({
+                            ...filter,
+                            [CollectionFilterField.FromDate]: getDateString(dt),
+                          });
+                        }
+                      }}
+                      className="w-full sm:w-40 py-2 px-3 rounded border-2 border-stroke bg-transparent font-medium outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input"
+                    />
+
+                    <input
+                      type="date"
+                      value={toDate}
+                      min={fromDate || undefined}
+                      disabled={!fromDate}
+                      onKeyDown={(e) => e.preventDefault()}
+                      onChange={(e) => {
+                        const dt = e.target.value;
+                        if (dt) {
+                          setToDate(dt);
+                          setFilter({
+                            ...filter,
+                            [CollectionFilterField.ToDate]: getDateString(dt),
+                          });
+                        }
+                      }}
+                      className="w-full sm:w-40 py-2 px-3 rounded border-2 border-stroke bg-transparent font-medium outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input"
+                    />
+                  </div>
+                )}
               </div>
 
-              {/* From Date */}
-              <input
-                type="date"
-                name="fromDate"
-                value={fromDate}
-                disabled={selectedDateType !== 6}
-                className="custom-input-date custom-input-date-1 w-full sm:w-40 py-2 px-3 rounded border-[2px] border-stroke bg-transparent font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                onKeyDown={(e) => e.preventDefault()}
-                onChange={async (e) => {
-                  const dt = e.target.value;
-                  if (dt) {
-                    setFromDate(dt);
-                    setFilter({
-                      ...filter,
-                      [CollectionFilterField.FromDate]: getDateString(dt),
-                    });
-                  }
-                }}
-                max={today}
-              />
+              <div className="flex flex-col sm:flex-row gap-3 sm:items-center flex-wrap">
+                <div className="relative w-full sm:w-[220px]">
+                  <select
+                    value={selectedCenter}
+                    onChange={onSelectCenter}
+                    className="w-full appearance-none py-2 pl-3 pr-8 rounded border-2 border-stroke bg-transparent font-medium outline-none focus:border-primary dark:border-form-strokedark dark:bg-form-input"
+                  >
+                    <option value="">Select Center</option>
+                    {centers.map((c, i) => (
+                      <option key={i} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDownIcon className="w-5 absolute top-1/2 right-3 -translate-y-1/2" />
+                </div>
 
-              {/* To Date */}
-              <input
-                type="date"
-                name="toDate"
-                value={toDate}
-                disabled={selectedDateType !== 6 || !fromDate}
-                className="custom-input-date custom-input-date-2 w-full sm:w-40 py-2 px-3 rounded border-[2px] border-stroke bg-transparent font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                onKeyDown={(e) => e.preventDefault()}
-                onChange={async (e) => {
-                  const dt = e.target.value;
-                  if (dt) {
-                    setToDate(dt);
-                    setFilter({
-                      ...filter,
-                      [CollectionFilterField.ToDate]: getDateString(dt),
-                    });
-                  }
-                }}
-                min={fromDate || undefined}
-              />
-            </div>
+                <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                  <button
+                    onClick={onSearch}
+                    className="w-full sm:w-auto rounded-full bg-primary py-2 px-6 font-medium text-white hover:bg-opacity-90"
+                  >
+                    Search
+                  </button>
 
-            <div className="flex flex-col sm:flex-row sm:items-start sm:gap-3 gap-2 pt-2 flex-wrap">
-              {/* Select box */}
-              <div className="relative inline-block w-full sm:w-[220px]">
-                <select
-                  name="centers"
-                  id="centers"
-                  value={selectedCenter}
-                  onChange={onSelectCenter}
-                  className="relative z-20 inline-flex w-full appearance-none bg-transparent py-2 pl-3 pr-8 rounded border-[2px] border-stroke font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                >
-                  <option value="">Select Center</option>
-                  {centers.map((center, index) => (
-                    <option key={`center-${index}`} value={center.id}>
-                      {center.name}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDownIcon className="w-5 absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer" />
+                  <button
+                    onClick={onReset}
+                    className="w-full sm:w-auto rounded-full bg-body py-2 px-6 font-medium text-white hover:bg-opacity-90"
+                  >
+                    Clear
+                  </button>
+                </div>
               </div>
-
-              {/* Search button */}
-              <button
-                className="mt-2 sm:mt-0 sm:ml-2 items-center rounded-full bg-primary py-2 px-4 text-center font-medium text-white hover:bg-opacity-90 w-full sm:w-auto"
-                onClick={onSearch}
-              >
-                Search
-              </button>
-
-              {/* Reset button */}
-              <button
-                className="mt-2 sm:mt-0 items-center rounded-full bg-body py-2 px-4 text-center font-medium text-white hover:bg-opacity-90 w-full sm:w-auto"
-                onClick={onReset}
-              >
-                Clear
-              </button>
             </div>
 
             <div className="py-4">
               {isLoading && <Loader />}
               {!isLoading && error && <ShowError error={error} />}
+
               {!isLoading &&
                 !error &&
-                (data.length > 0 ? (
-                  data.map((collection, index) => {
-                    return (
-                      <div key={`collect-${index}`}>
-                        <h4 className="text-md font-bold text-black dark:text-white pb-2">
-                          {collection.date}
-                        </h4>
-                        {collection.collections.map((item, indexI) => {
-                          return (
-                            <div className="px-2">
-                              <CollectionCard
-                                key={`collect-${index}-${indexI}`}
-                                collection={item}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  })
+                (data.length ? (
+                  data.map((group, i) => (
+                    <div key={i} className="mb-4">
+                      <h4 className="text-md font-bold text-black dark:text-white pb-2">
+                        {group.date}
+                      </h4>
+
+                      {group.collections.map((item, j) => (
+                        <div key={j} className="px-1 sm:px-2">
+                          <CollectionCard collection={item} />
+                        </div>
+                      ))}
+                    </div>
+                  ))
                 ) : (
-                  <div className="w-full py-4">No collections available</div>
+                  <div className="w-full py-6 text-center text-gray-500">
+                    No collections available
+                  </div>
                 ))}
             </div>
           </div>

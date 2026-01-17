@@ -53,7 +53,7 @@ export const AutoComplete = ({
             <MagnifyingGlassIcon className="ml-3 h-5 w-5 mt-3 text-input-icon absolute" />
           )}
           <Combobox.Input
-            className={`pl-10 w-full appearance-none border-[2px] py-2 px-5 rounded-md border-stroke bg-transparent outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary`}
+            className={`pl-10 w-full appearance-none border-[2px] py-2 px-5 rounded-md border-stroke bg-transparent outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary`}
             displayValue={(option: any) => option?.name}
             onChange={(event) => setSearchTerm(event.target.value)}
             placeholder={placeholder || 'Search'}

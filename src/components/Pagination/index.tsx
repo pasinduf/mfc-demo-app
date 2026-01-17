@@ -1,6 +1,5 @@
 import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
-import { usePagination, DOTS } from './usePagination';
-
+import { usePagination, } from './usePagination';
 interface Props {
   page: number;
   rowsPerPage: number;
@@ -12,6 +11,7 @@ interface Props {
 }
 
 const Pagination = ({ page, rowsPerPage, count, onChangePage }: Props) => {
+
   const siblingCount = 1;
   const pages =
     count % rowsPerPage > 0
@@ -42,7 +42,7 @@ const Pagination = ({ page, rowsPerPage, count, onChangePage }: Props) => {
   return (
     <div className="flex items-center gap-4">
       <button
-        className="flex items-center gap-2 rounded-full bg-transparent px-4 py-1 cursor-pointer hover:bg-bodydark2 text-center font-medium text-black"
+        className="flex items-center gap-2 rounded-full bg-transparent px-4 py-1 cursor-pointer hover:bg-bodydark2 text-center font-medium"
         onClick={(event) => prev(event)}
         disabled={page === 0}
       >
@@ -58,7 +58,7 @@ const Pagination = ({ page, rowsPerPage, count, onChangePage }: Props) => {
               onClick={(event) => onChangePage(event, index)}
               className={`${
                 page == index
-                  ? 'bg-black text-white'
+                  ? 'bg-bodydark2 text-white'
                   : 'bg-transparent hover:bg-white  text-black'
               } cursor-pointer px-2`}
             >
@@ -89,7 +89,7 @@ const Pagination = ({ page, rowsPerPage, count, onChangePage }: Props) => {
       <button
         onClick={(event) => next(event)}
         disabled={page + 1 === pages}
-        className="flex items-center gap-2 rounded-full bg-transparent px-4 py-1 cursor-pointer hover:bg-bodydark2 text-center font-medium text-black"
+        className="flex items-center gap-2 rounded-full bg-transparent px-4 py-1 cursor-pointer hover:bg-bodydark2 text-center font-medium"
       >
         Next
         <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />

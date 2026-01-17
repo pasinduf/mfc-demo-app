@@ -67,6 +67,7 @@ const AddPaymentModal = ({
            +balance,
            collection ? true : false,
            collection ? +collection.amount : 0,
+           prevCollection.isEarly,
          );
          setArrears(arrears);
 
@@ -156,6 +157,7 @@ const AddPaymentModal = ({
                         placeholder="Enter amount"
                         name="amount"
                         value={values.amount}
+                        onFocus={(e) => e.target.select()}
                         onChange={(e) => {
                           const value = e.target.value;
                           setFieldValue('amount', +value > 0 ? value : 0);
@@ -174,6 +176,7 @@ const AddPaymentModal = ({
                             +balance,
                             collection ? true : false,
                             collection ? +collection.amount : 0,
+                            prevCollection.isEarly,
                           );
                           setArrears(arrears);
                         }}
@@ -185,7 +188,9 @@ const AddPaymentModal = ({
                       )}
                     </div>
                     <div>
-                      <div className="text-sm font-bold">Installment: {+installmentAmount} </div>
+                      <div className="text-sm font-bold">
+                        Installment: {+installmentAmount}{' '}
+                      </div>
                       <span className="text-sm font-bold">Arrears: </span>
                       <span
                         className={
@@ -196,7 +201,7 @@ const AddPaymentModal = ({
                             : ''
                         }
                       >
-                        {arrears}
+                        {arrears.toFixed(2)}
                       </span>
                     </div>
                   </div>

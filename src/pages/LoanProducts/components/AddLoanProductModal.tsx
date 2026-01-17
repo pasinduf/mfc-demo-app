@@ -101,7 +101,7 @@ const AddLoanProductModal = ({ open, onClose, onRefresh, product }: Props) => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Code
                     </label>
                     <Input
@@ -119,7 +119,7 @@ const AddLoanProductModal = ({ open, onClose, onRefresh, product }: Props) => {
                   </div>
 
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Interest Rate
                     </label>
                     <Input
@@ -139,13 +139,13 @@ const AddLoanProductModal = ({ open, onClose, onRefresh, product }: Props) => {
                     )}
                   </div>
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold ">
                       Term
                     </label>
                     <select
                       name="repaymentTerm"
                       value={values.repaymentTerm}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                       onChange={(e) =>
                         setFieldValue('repaymentTerm', e.target.value)
                       }
@@ -167,7 +167,7 @@ const AddLoanProductModal = ({ open, onClose, onRefresh, product }: Props) => {
                   </div>
 
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Document Charge(%)
                     </label>
                     <Input

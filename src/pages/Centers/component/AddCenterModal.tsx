@@ -115,7 +115,7 @@ const AddCenterModal = ({
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Center name
                     </label>
                     <Input
@@ -133,7 +133,7 @@ const AddCenterModal = ({
                   </div>
 
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Center code
                     </label>
                     <Input
@@ -150,13 +150,13 @@ const AddCenterModal = ({
                     )}
                   </div>
                   <div className="pb-3">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Branch
                     </label>
                     <select
                       name="branch"
                       value={values.branch}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                       onChange={(e) => setFieldValue('branch', e.target.value)}
                     >
                       <option value="">Select</option>
@@ -179,13 +179,13 @@ const AddCenterModal = ({
                   </div>
 
                   <div className="pb-2">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Collection Day
                     </label>
                     <select
                       name="collectionWeekDay"
                       value={values.collectionWeekDay}
-                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                      className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                       onChange={(e) =>
                         setFieldValue('collectionWeekDay', e.target.value)
                       }

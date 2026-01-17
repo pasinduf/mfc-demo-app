@@ -57,7 +57,7 @@ const AddBranchModal = ({ open, onClose, branch, onRefresh }: Props) => {
                     const branchFilters = await getFilterBranches();
                     setStore({
                       ...store,
-                      branchFilters
+                      branchFilters,
                     });
 
                     onRefresh();
@@ -88,7 +88,7 @@ const AddBranchModal = ({ open, onClose, branch, onRefresh }: Props) => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="pb-5">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Branch name
                     </label>
                     <Input
@@ -106,7 +106,7 @@ const AddBranchModal = ({ open, onClose, branch, onRefresh }: Props) => {
                   </div>
 
                   <div className="pb-2">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Branch code
                     </label>
                     <Input
@@ -127,6 +127,7 @@ const AddBranchModal = ({ open, onClose, branch, onRefresh }: Props) => {
                     <Button text="Save" type="submit" disabled={isSubmitting} />
                     <Button
                       text="Close"
+                      className="bg-bodydark2"
                       inverse
                       onClick={() => {
                         setErrors({});

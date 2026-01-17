@@ -205,6 +205,7 @@ const AddPaymentModal = ({
                         placeholder="amount"
                         name="amount"
                         value={values.amount}
+                        onFocus={(e) => e.target.select()}
                         onChange={(e) => {
                           const value = e.target.value;
                           setFieldValue('amount', +value > 0 ? value : 0);
@@ -218,11 +219,12 @@ const AddPaymentModal = ({
                             prevCollection.lastCollection
                               ? prevCollection.lastCollection.arrears
                               : 0,
-                             + loan.installmentAmount,
+                            +loan.installmentAmount,
                             loan.repaymentTerm,
                             +loan.balance,
                             collection ? true : false,
-                           collection ? +collection.amount :0
+                            collection ? +collection.amount : 0,
+                            prevCollection.isEarly,
                           );
                           setArrears(arrears);
                         }}

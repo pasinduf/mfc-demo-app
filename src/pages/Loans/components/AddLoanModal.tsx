@@ -172,7 +172,7 @@ const AddLoanModal = ({
                 <form onSubmit={handleSubmit}>
                   <div className="h-auto pb-3">
                     <div className="pb-3">
-                      <label className="text-sm text-black font-semibold dark:text-white">
+                      <label className="text-sm text-black font-semibold">
                         Date
                       </label>
                       <div className="relative">
@@ -180,7 +180,7 @@ const AddLoanModal = ({
                           type="date"
                           name="date"
                           value={values.enteredDate}
-                          className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
                           onKeyDown={(e) => {
                             e.preventDefault();
                           }}
@@ -199,13 +199,13 @@ const AddLoanModal = ({
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Branch
                         </label>
                         <select
                           name="branch"
                           value={values.branch}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                           onChange={async (e) => {
                             const id = +e.target.value;
                             const centers = await getCentersByBranch(id);
@@ -234,14 +234,14 @@ const AddLoanModal = ({
                         </select>
                       </div>
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Center
                         </label>
                         <select
                           name="center"
                           value={values.center}
                           disabled={values.branch == ''}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                           onChange={async (e) => {
                             const id = +e.target.value;
                             const members = await getMembersByCenter(
@@ -279,7 +279,7 @@ const AddLoanModal = ({
                     </div>
 
                     <div className="pb-3">
-                      <label className="text-sm text-black font-semibold dark:text-white">
+                      <label className="text-sm text-black font-semibold">
                         Member
                       </label>
                       <AutoComplete
@@ -301,13 +301,13 @@ const AddLoanModal = ({
 
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Product
                         </label>
                         <select
                           name="product"
                           value={values.product}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                           onChange={async (e) => {
                             const id = +e.target.value;
                             setFieldValue('product', id);
@@ -351,7 +351,7 @@ const AddLoanModal = ({
                         )}
                       </div>
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Repayment Term
                         </label>
                         <Input
@@ -370,7 +370,7 @@ const AddLoanModal = ({
 
                     <div className="flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Amount
                         </label>
                         <Input
@@ -390,7 +390,7 @@ const AddLoanModal = ({
                         )}
                       </div>
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Terms
                         </label>
                         <Input

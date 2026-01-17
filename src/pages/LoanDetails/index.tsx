@@ -142,7 +142,7 @@ const LoanDetails = () => {
                       />
                     </div>
                   </div>
-                  <div className="text-sm text-black font-semibold w-full xl:w-1/2">
+                  <div className="text-sm font-semibold w-full xl:w-1/2">
                     #{loan.code}
                   </div>
                 </div>
@@ -399,7 +399,7 @@ const LoanDetails = () => {
               <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                 <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
                   <h3 className="font-medium text-black dark:text-white">
-                    Guardian Details
+                    Guarantor Details
                   </h3>
                 </div>
                 <div className="px-6.5 pt-4">
@@ -456,9 +456,7 @@ const LoanDetails = () => {
                     <div className="text-title-md text-black dark:text-white">
                       Collection Details
                       <button className="ml-3" onClick={fetchCollections}>
-                        <ArrowPathIcon
-                          className="w-6 cursor-pointer"
-                        />
+                        <ArrowPathIcon className="w-6 cursor-pointer" />
                       </button>
                     </div>
                   </div>

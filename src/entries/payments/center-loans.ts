@@ -13,6 +13,7 @@ export interface CenterLoans {
   prevCollectionDate: string;
   isEditable: boolean;
   collection: number;
+  isEarly: boolean;
   lastCollection?: Collection;
 }
 

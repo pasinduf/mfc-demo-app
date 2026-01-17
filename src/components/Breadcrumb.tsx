@@ -27,7 +27,7 @@ const Breadcrumb = ({ pageName, navigateBack }: BreadcrumbProps) => {
           <li>
             <Link to="/">Dashboard /</Link>
           </li>
-          <li className="text-primary">{pageName}</li>
+          <li>{pageName}</li>
         </ol>
       </nav>
     </div>

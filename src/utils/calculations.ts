@@ -7,14 +7,17 @@ export const getArrears = (
   repaymentTerm: string,
   balance: number,
   isEdit:boolean,
-  previousCollectionAmount : number
+  previousCollectionAmount : number,
+  isEarly:boolean
 ) => {
   const millisecondsPerDay = 86400000;
 
+  if (isEarly) return installment - collectionAmount; //collectionAmount > installment ? installment - collectionAmount : 0;
+
   if (isEdit){
-        return (
-          prevArrearsAmount - (collectionAmount - previousCollectionAmount)
-        );;
+    return (
+      prevArrearsAmount - (collectionAmount - previousCollectionAmount)
+    );
   } 
 
   const prevDate = new Date(prevDateValue);

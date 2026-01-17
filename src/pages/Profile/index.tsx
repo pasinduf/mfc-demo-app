@@ -176,7 +176,7 @@ const Settings = () => {
                           Centers
                         </label>
                         <div className="relative">
-                          <MultiselectDropdown
+                          {/* <MultiselectDropdown
                             options={centerOptions}
                             selectedOptions={user?.centers?.map(
                               (center: any) => {
@@ -185,7 +185,19 @@ const Settings = () => {
                             )}
                             onSelectOptions={() => {}}
                             disabled
-                          />
+                          /> */}
+                          <ul className="flex gap-4 list-none">
+                            {user?.centers?.map(
+                              (center: any, index: number) => (
+                                <li
+                                  key={index}
+                                  className="before:content-['•'] before:mr-2"
+                                >
+                                  {center.name}
+                                </li>
+                              ),
+                            )}
+                          </ul>
                         </div>
                       </div>
                     )}

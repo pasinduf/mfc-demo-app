@@ -17,7 +17,7 @@ const DayEndModal = ({ open, onClose }: Props) => {
 
   return (
     <Modal
-      size='small'
+      size="small"
       isOpen={open}
       setIsOpen={onClose}
       title="Day End"
@@ -67,7 +67,7 @@ const DayEndModal = ({ open, onClose }: Props) => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="mt-1">
-                    <label className="text-sm text-black font-semibold dark:text-white">
+                    <label className="text-sm text-black font-semibold">
                       Date
                     </label>
                     <div className="pb-3 mt-1">
@@ -76,7 +76,7 @@ const DayEndModal = ({ open, onClose }: Props) => {
                           type="date"
                           name="date"
                           value={values.date}
-                          className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                          className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark  dark:focus:border-primary"
                           onKeyDown={(e) => {
                             e.preventDefault();
                           }}
@@ -122,6 +122,7 @@ const DayEndModal = ({ open, onClose }: Props) => {
                     />
                     <Button
                       text="Close"
+                      className="bg-bodydark2"
                       inverse
                       onClick={() => {
                         onClose();

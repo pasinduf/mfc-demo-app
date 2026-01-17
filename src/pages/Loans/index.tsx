@@ -199,9 +199,11 @@ const Loans = () => {
     const allowAdd = ()=>{
       return auth?.access?.includes(Add_Loan);
     }
-        
-    const allowEdit = () => {
-        return auth?.access?.includes(Edit_Loan);
+
+    const allowEdit = (loan:Loan) => {
+        return auth?.access?.includes(Edit_Loan) &&  
+        (loan.status === Loan_STATUS_OPTIONS.PendingApproval ||
+        loan.status === Loan_STATUS_OPTIONS.PendingDocumentCharge)
     };
 
     const allowDelete = () => {
@@ -293,7 +295,7 @@ const Loans = () => {
                       return (
                         <tr
                           key={`loan-${index}`}
-                          className="cursor-pointer hover:bg-stroke"
+                          className="cursor-pointer hover:bg-graydark/50 dark:hover:bg-meta-4"
                         >
                           <td
                             className="border-b border-[#eee] py-5 px-4 dark:border-strokedark"
@@ -357,9 +359,7 @@ const Loans = () => {
                               ? new Date(loan.enteredDate).toLocaleDateString()
                               : 'N/A'}
                           </td>
-                          <td
-                            className="border-b border-[#eee] py-5 px-4 dark:border-strokedark"
-                          >
+                          <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                             <div className="flex items-center space-x-3.5">
                               {loan.status ===
                               Loan_STATUS_OPTIONS.PendingDocumentCharge ? (
@@ -414,16 +414,10 @@ const Loans = () => {
 
                           <td className="py-5 px-4">
                             <div className="flex items-center space-x-3.5">
-                              {allowEdit() && (
+                              {allowEdit(loan) && (
                                 <button>
                                   <PencilSquareIcon
-                                    className={`w-6 cursor-pointer text-primary ${
-                                      loan.status !==
-                                        Loan_STATUS_OPTIONS.PendingApproval &&
-                                      loan.status !==
-                                        Loan_STATUS_OPTIONS.PendingDocumentCharge &&
-                                      'pointer-events-none opacity-40'
-                                    }`}
+                                    className="w-6 cursor-pointer"
                                     onClick={() => onSelectLoan(loan.id)}
                                   />
                                 </button>

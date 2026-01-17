@@ -150,7 +150,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                 }
 
                 if (!values.empNumber) {
-                  errors.nic = 'Emp No is required';
+                  errors.empNumber = 'Emp No is required';
                 }
 
                 if (!values.address) {
@@ -198,7 +198,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                       );
                 const currentAccess = values?.access ? values.access : [];
                 const accessList = [...currentAccess, selectedAccess.id];
-                payload.access = accessList;
+                payload.access = [...new Set(accessList)];
 
                 try {
                   const result =
@@ -239,7 +239,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                   <div className="pb-5 overflow-y-auto px-3">
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Username <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -258,7 +258,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Password <span className="text-danger">*</span>
                         </label>
                         <div className="relative">
@@ -301,7 +301,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           First Name <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -319,7 +319,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Last Name <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -339,7 +339,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           NIC <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -364,7 +364,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           DOB
                         </label>
                         <Input
@@ -378,7 +378,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Phone Number <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -396,7 +396,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Emp No <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -416,7 +416,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                     </div>
 
                     <div className="mb-3">
-                      <label className="text-sm text-black font-semibold dark:text-white">
+                      <label className="text-sm text-black font-semibold">
                         Address <span className="text-danger">*</span>
                       </label>
                       <textarea
@@ -424,7 +424,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
                         name="address"
                         placeholder="address"
                         value={values.address}
-                        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:focus:border-primary"
                         onChange={handleChange}
                       ></textarea>
                       {errors.address && touched.address && (
@@ -436,13 +436,13 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     <div className="mb-3">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Role <span className="text-danger">*</span>
                         </label>
                         <select
                           name="role"
                           value={values.role}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark "
                           onChange={async (e) => {
                             setFieldValue('role', e.target.value);
                             setFieldValue('centers', []);
@@ -470,7 +470,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     {values.role && +values.role === userRole.Collector && (
                       <div className="mb-8 mt-4">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Centers
                         </label>
                         <MultiselectDropdown
@@ -490,7 +490,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     <div className="mt-6">
                       <div>
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Permissions
                         </label>
                       </div>

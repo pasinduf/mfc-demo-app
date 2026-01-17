@@ -199,7 +199,7 @@ const LoanProducts = () => {
                             <td className="py-5 px-4">
                               <div className="flex items-center space-x-3.5">
                                 <PencilSquareIcon
-                                  className="w-6 cursor-pointer text-primary"
+                                  className="w-6 cursor-pointer"
                                   onClick={() => onSelectProduct(product)}
                                 />
                               </div>

@@ -68,7 +68,7 @@ const ApproveLoanModal = ({ open, onClose, loan, onRefresh }: Props) => {
               }) => (
                 <form onSubmit={handleSubmit}>
                   <div className="text-md font-bold">
-                    Once approve the loan need to add document charges to
+                    Once approved the loan need to add document charges to
                     release..
                   </div>
 

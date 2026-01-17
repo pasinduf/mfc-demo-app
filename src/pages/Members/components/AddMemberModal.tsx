@@ -58,7 +58,7 @@ const AddMemberModal = ({
 
   return (
     <Modal
-      size='large'
+      size="large"
       isOpen={open}
       setIsOpen={onClose}
       title={`${member && member?.id > 0 ? 'Update' : 'Add new'} member`}
@@ -199,13 +199,13 @@ const AddMemberModal = ({
                   <div className="h-100 overflow-y-auto">
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold ">
                           Branch <span className="text-danger">*</span>
                         </label>
                         <select
                           name="branch"
                           value={values.branch}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                           onChange={async (e) => {
                             const id = +e.target.value;
                             const centers = await getCentersByBranch(id);
@@ -234,14 +234,14 @@ const AddMemberModal = ({
                         </select>
                       </div>
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Center <span className="text-danger">*</span>
                         </label>
                         <select
                           name="center"
                           value={values.center}
                           disabled={!!member || values.branch == ''}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                           onChange={async (e) => {
                             const id = +e.target.value;
                             const result = await generateMemberCode(id);
@@ -270,7 +270,7 @@ const AddMemberModal = ({
                     </div>
 
                     <div className="mb-3">
-                      <label className="text-sm text-black font-semibold dark:text-white">
+                      <label className="text-sm text-black font-semibold ">
                         Code
                       </label>
                       <Input
@@ -283,7 +283,7 @@ const AddMemberModal = ({
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           First Name <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -300,7 +300,7 @@ const AddMemberModal = ({
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Last Name <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -319,7 +319,7 @@ const AddMemberModal = ({
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           NIC <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -343,7 +343,7 @@ const AddMemberModal = ({
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold ">
                           DOB
                         </label>
                         <Input
@@ -357,7 +357,7 @@ const AddMemberModal = ({
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Phone Number <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -375,7 +375,7 @@ const AddMemberModal = ({
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Business Type <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -393,14 +393,14 @@ const AddMemberModal = ({
                     </div>
 
                     <div className="mb-3">
-                      <label className="text-sm text-black font-semibold dark:text-white">
+                      <label className="text-sm text-black font-semibold">
                         Address <span className="text-danger">*</span>
                       </label>
                       <textarea
                         rows={2}
                         name="address"
                         value={values.address}
-                        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:focus:border-primary"
                         onChange={handleChange}
                       ></textarea>
                       {errors.address && touched.address && (
@@ -411,14 +411,14 @@ const AddMemberModal = ({
                     </div>
 
                     <div className="border-b border-stroke py-3 px-6.5 dark:border-strokedark">
-                      <h3 className="text-center font-medium text-black dark:text-white">
-                        Guardian Details
+                      <h3 className="text-center font-medium text-black">
+                        Guarantor Details
                       </h3>
                     </div>
 
                     <div className="mt-2 mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           First Name <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -436,7 +436,7 @@ const AddMemberModal = ({
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Last Name <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -456,7 +456,7 @@ const AddMemberModal = ({
 
                     <div className="mb-3 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           NIC <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -473,7 +473,7 @@ const AddMemberModal = ({
                       </div>
 
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Phone Number <span className="text-danger">*</span>
                         </label>
                         <Input
@@ -493,13 +493,13 @@ const AddMemberModal = ({
 
                     <div className="mb-4 flex flex-col gap-6 xl:flex-row">
                       <div className="w-full xl:w-1/2">
-                        <label className="text-sm text-black font-semibold dark:text-white">
+                        <label className="text-sm text-black font-semibold">
                           Relationship <span className="text-danger">*</span>
                         </label>
                         <select
                           name="garantorRelationShip"
                           value={values.garantorRelationShip}
-                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
+                          className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark"
                           onChange={async (e) => {
                             setFieldValue(
                               'garantorRelationShip',

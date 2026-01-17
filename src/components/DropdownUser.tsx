@@ -143,10 +143,10 @@ const DropdownUser = () => {
         size="small"
         isOpen={isOpenLogOut}
         setIsOpen={setOpenLogout}
-        title="Confirm Log Out"
+        title="Log Out"
         content={
           <div className="p-6  text-center">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h2 className="text-lg font-semibold text-gray-900">
               Are you sure you want to log out?
             </h2>
 

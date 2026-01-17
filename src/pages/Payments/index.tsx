@@ -23,6 +23,7 @@ import { getDateString } from '../../utils/YYYY-MM-DD';
 import { toastMessage } from '../../components/toastMessage';
 import { DEFAULT_ERROR_MESSAGE } from '../../api/const/message';
 import { getCollectors } from '../../api/collection/getCollectors';
+import { Modal } from '../../components/modal';
 
 const Payments = () => {
   const { auth }: any = useAuth();
@@ -35,6 +36,7 @@ const Payments = () => {
       const [date, setDate] = useState<any>(today);
       const [selectedCenter, setSelectedCenter] = useState<any>(0);
       const [data,setData] = useState<CenterLoans[]>([])
+      const [openConfirmModal, setOpenConfirmModal] = useState(false);  
     
     
       const [filter, setFilter] = useState<FilterInputs>({
@@ -79,57 +81,57 @@ const Payments = () => {
     };
 
       
-     
-      const fetchLoans = async () => {
-        setIsLoading(true)
-        try {
-          const filters = createObjectWithoutEmptyValues(filter);
-    
-          const params = {
-            ...filters,
-          };
-          const result = await getLoansByCenter(params);
+    const fetchLoans = async () => {
+      setIsLoading(true)
+      try {
+        const filters = createObjectWithoutEmptyValues(filter);
+  
+        const params = {
+          ...filters,
+        };
+        const result = await getLoansByCenter(params);
 
-          const records :any = [];
-        
-          result.map((item: any) =>
-            records.push({
-              ...item,
-              arrears: getArrears(
-                item.prevCollectionDate,
-                date,
-                item.collection,
-                item.lastCollection ? item.lastCollection.arrears : 0,
-                item.installmentAmount,
-                item.repaymentTerm,
-                item.balance,
-                item.lastCollection ? true : false,
-                item.lastCollection ? item.lastCollection.amount : 0,
-              ),
-            }),
-          ),
+        const records :any = [];
+      
+        result.map((item: any) =>
+          records.push({
+            ...item,
+            arrears: getArrears(
+              item.prevCollectionDate,
+              date,
+              item.collection,
+              item.lastCollection ? item.lastCollection.arrears : 0,
+              item.installmentAmount,
+              item.repaymentTerm,
+              item.balance,
+              item.lastCollection ? true : false,
+              item.lastCollection ? item.lastCollection.amount : 0,
+              item.isEarly
+            ),
+          }),
+        ),
           setData(records);
-    
-        } catch (error: any) {
-        } finally {
-          setIsLoading(false);
-        }
-      };
-    
-      const onClearFilter = ()=> {
-        setData([])
-        setCenterOptions([]);
-        setDate(today);
-        setSelectedCenter(0);
-        setFilter({
-          [CenterLoanstFilterField.Date]: today,
-          [CenterLoanstFilterField.Center]: null,
-        });
-      };
+  
+      } catch (error: any) {
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  
+    const onClearFilter = ()=> {
+      setData([])
+      fetchCenters(date);
+      setDate(today);
+      setSelectedCenter(0);
+      setFilter({
+        [CenterLoanstFilterField.Date]: today,
+        [CenterLoanstFilterField.Center]: null,
+      });
+    };
 
 
   const saveBulk = async ()=>{
-    
+    setOpenConfirmModal(false)
     if(data?.length >0){
       setSubmitting(true);
       const payload: any = [];
@@ -184,7 +186,7 @@ const Payments = () => {
               type="date"
               name="date"
               value={date}
-              className="custom-input-date custom-input-date-1 w-full rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              className="custom-input-date custom-input-date-1 w-full rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
               onKeyDown={(e) => {
                 e.preventDefault();
               }}
@@ -215,7 +217,7 @@ const Payments = () => {
                 width: '220px',
                 height: '45px',
               }}
-              className="relative z-20 inline-flex appearance-none   pl-3 pr-8 text-black text-md  rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              className="relative z-20 inline-flex appearance-none   pl-3 pr-8 text-black text-md  rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
             >
               <option value="">Select Center</option>
               {centerOptions &&
@@ -250,12 +252,34 @@ const Payments = () => {
             <Button
               text="Save"
               type="submit"
-              onClick={saveBulk}
+              onClick={() => setOpenConfirmModal(true)}
               disabled={submitting}
             />
           )}
         </div>
       </div>
+
+      <Modal
+        isOpen={openConfirmModal}
+        setIsOpen={setOpenConfirmModal}
+        title="Save Payments"
+        content={
+          <div>
+            <div className="flex flex-col gap-5.5 p-4 mt-3">
+              <div>Are you sure you want to save the all payments?</div>
+              <div className="flex gap-3 mt-6 justify-end text-right">
+                <Button text="Yes" onClick={saveBulk} className="bg-primary" />
+                <Button
+                  text="No"
+                  inverse
+                  className="bg-bodydark2"
+                  onClick={() => setOpenConfirmModal(false)}
+                />
+              </div>
+            </div>
+          </div>
+        }
+      />
 
       {isLoading && <Loader />}
 
@@ -287,24 +311,28 @@ const Payments = () => {
                     <td className="text-center">
                       <select
                         name="collectorId"
-                        value={item.lastCollection ? item.lastCollection?.collectorId : ''}
+                        value={
+                          item.lastCollection
+                            ? item.lastCollection?.collectorId
+                            : ''
+                        }
                         className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input"
                         onChange={async (e) => {
                           const id = +e.target.value;
-                          
-                             setData((prevData: any) =>
-                               prevData.map((data: any) =>
-                                 data.id === item.id
-                                   ? {
-                                       ...data,
-                                       lastCollection: {
-                                         ...data.lastCollection,
-                                         collectorId: id > 0 ? id : '',
-                                       },
-                                     }
-                                   : data,
-                               ),
-                             );
+
+                          setData((prevData: any) =>
+                            prevData.map((data: any) =>
+                              data.id === item.id
+                                ? {
+                                    ...data,
+                                    lastCollection: {
+                                      ...data.lastCollection,
+                                      collectorId: id > 0 ? id : '',
+                                    },
+                                  }
+                                : data,
+                            ),
+                          );
                         }}
                       >
                         <option value="">Select</option>
@@ -329,6 +357,7 @@ const Payments = () => {
                           name="amount"
                           value={item.collection}
                           disabled={!allowSave()}
+                          onFocus={(e) => e.target.select()}
                           onChange={(e) => {
                             const value = +e.target.value;
                             setData((prevData: any) =>
@@ -363,6 +392,7 @@ const Payments = () => {
                                         item.lastCollection
                                           ? item.lastCollection.amount
                                           : 0,
+                                        item.isEarly,
                                       ),
                                     }
                                   : data,
@@ -382,7 +412,7 @@ const Payments = () => {
                               : ''
                           }
                         >
-                          {item.arrears}
+                          {item.arrears.toFixed(2)}
                         </span>
                       </div>
                     </td>

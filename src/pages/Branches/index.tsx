@@ -119,18 +119,18 @@ const Branch = () => {
                   <tbody>
                     {branches.map((branch, index) => {
                       return (
-                        <tr key={`branch-${index}`}>
-                          <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-11">
+                        <tr key={`branch-${index}`} className="px-4">
+                          <td className="border-b border-[#eee] pl-9 dark:border-strokedark xl:pl-11">
                             <h5 className="font-medium text-black dark:text-white">
                               {branch.code}
                             </h5>
                           </td>
-                          <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                          <td className="border-b border-[#eee]  dark:border-strokedark">
                             <p className="text-black dark:text-white">
                               {branch.name}
                             </p>
                           </td>
-                          <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                          <td className="border-b border-[#eee] dark:border-strokedark">
                             {branch.centers &&
                               branch.centers.length > 0 &&
                               branch.centers.map((center, index) => {
@@ -148,7 +148,7 @@ const Branch = () => {
                             <td className="py-5 px-4">
                               <div className="flex items-center space-x-3.5">
                                 <PencilSquareIcon
-                                  className="w-6 cursor-pointer text-primary"
+                                  className="w-6 cursor-pointer"
                                   onClick={() => onSelectBranch(branch)}
                                 />
                               </div>

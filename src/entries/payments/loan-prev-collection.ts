@@ -1,5 +1,6 @@
 export interface LoanPrevCollection {
   prevCollectionDate: Date;
+  isEarly: boolean;
   lastCollection?: Collection;
 }
 
