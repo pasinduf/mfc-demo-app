@@ -7,7 +7,7 @@ export const createClient = ({
   tokenRepository: TokenRepository;
 }) => {
   const client = axios.create({
-    baseURL: '/api',
+    baseURL: '/api'
   });
 
   //let refreshRequest: AxiosPromise | null = null;
