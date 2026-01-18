@@ -571,7 +571,7 @@ const LoanDetails = () => {
                                   <div className="flex items-center gap-2">
                                     {allowEditPayment() && (
                                       <PencilSquareIcon
-                                        className="w-6 cursor-pointer"
+                                        className="w-5 cursor-pointer"
                                         onClick={() =>
                                           !isLoading &&
                                           onEditCollection(collection)

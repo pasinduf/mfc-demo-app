@@ -144,16 +144,16 @@ const Branch = () => {
                                 );
                               })}
                           </td>
-                          {allowEdit() && (
+                          {allowEdit() ? (
                             <td className="py-5 px-4">
                               <div className="flex items-center space-x-3.5">
                                 <PencilSquareIcon
-                                  className="w-6 cursor-pointer"
+                                  className="w-5 cursor-pointer"
                                   onClick={() => onSelectBranch(branch)}
                                 />
                               </div>
                             </td>
-                          )}
+                          ) : <td className="py-5 px-4"></td>}
                         </tr>
                       );
                     })}

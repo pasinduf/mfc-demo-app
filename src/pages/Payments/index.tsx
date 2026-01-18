@@ -27,36 +27,38 @@ import { Modal } from '../../components/modal';
 
 const Payments = () => {
   const { auth }: any = useAuth();
+  const today = getCurrentDate();
+  const [centerOptions,setCenterOptions] = useState<any>([]);
+  const [collectors, setCollectors] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [date, setDate] = useState<any>(today);
+  const [selectedCenter, setSelectedCenter] = useState<any>(0);
+  const [data,setData] = useState<CenterLoans[]>([])
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);  
+  
+  
+    const [filter, setFilter] = useState<FilterInputs>({
+      [CenterLoanstFilterField.Date]: date,
+      [CenterLoanstFilterField.Center]: null,
+    });
+
+    const [submitting, setSubmitting] = useState<boolean>(false);
 
 
-     const today = getCurrentDate();
-      const [centerOptions,setCenterOptions] = useState<any>([]);
-      const [collectors, setCollectors] = useState<any>([]);
-      const [isLoading, setIsLoading] = useState(false);
-      const [date, setDate] = useState<any>(today);
-      const [selectedCenter, setSelectedCenter] = useState<any>(0);
-      const [data,setData] = useState<CenterLoans[]>([])
-      const [openConfirmModal, setOpenConfirmModal] = useState(false);  
-    
-    
-      const [filter, setFilter] = useState<FilterInputs>({
-        [CenterLoanstFilterField.Date]: date,
-        [CenterLoanstFilterField.Center]: null,
-      });
-
-      const [submitting, setSubmitting] = useState<boolean>(false);
-
-
-      const allowSave = ()=>{
-        return auth?.access?.includes(Add_Bulk_Payment);
-      }
-    
+    const allowSave = ()=>{
+      return auth?.access?.includes(Add_Bulk_Payment) && !data.some((item) => !item.isEditable);
+    }
+  
 
     useEffect(()=>{
       fetchCenters(date);
       fetchCollectors();
       
     },[])
+
+    useEffect(() => {
+      fetchCenters(date);
+    }, [date]);
 
     const fetchCenters = async (date:string)=>{
       const centers = await getCentersByDate(date);
@@ -120,7 +122,6 @@ const Payments = () => {
   
     const onClearFilter = ()=> {
       setData([])
-      fetchCenters(date);
       setDate(today);
       setSelectedCenter(0);
       setFilter({
@@ -179,7 +180,7 @@ const Payments = () => {
   return (
     <>
       <Breadcrumb pageName="Payments" />
-      <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between rounded-sm border border-stroke bg-white px-5 sm:px-4 xl:col-span-8 py-4">
+      <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between  sm:px-4 xl:col-span-8 py-4">
         <div className="flex items-start gap-4">
           <div>
             <input
@@ -217,7 +218,7 @@ const Payments = () => {
                 width: '220px',
                 height: '45px',
               }}
-              className="relative z-20 inline-flex appearance-none   pl-3 pr-8 text-black text-md  rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
+              className="relative z-20 inline-flex appearance-none   pl-3 pr-8 text-md  rounded border-[2px] border-stroke bg-transparent py-2 px-5 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:focus:border-primary"
             >
               <option value="">Select Center</option>
               {centerOptions &&
@@ -235,14 +236,14 @@ const Payments = () => {
 
           <div className="w-full lg:w-1/2 xl:w-1/4 mt-2">
             <MagnifyingGlassCircleIcon
-              className="w-8 cursor-pointer text-primary"
+              className="w-9 cursor-pointer"
               onClick={() => !isLoading && selectedCenter && fetchLoans()}
             />
           </div>
 
           <div className="w-full lg:w-1/2 xl:w-1/4 mt-2">
             <XCircleIcon
-              className="w-8 cursor-pointer text-base"
+              className="w-9 cursor-pointer text-base"
               onClick={onClearFilter}
             />
           </div>
@@ -250,7 +251,7 @@ const Payments = () => {
         <div className="text-right mr-4">
           {allowSave() && data.length > 0 && (
             <Button
-              text="Save"
+              text="Save All"
               type="submit"
               onClick={() => setOpenConfirmModal(true)}
               disabled={submitting}
@@ -283,7 +284,7 @@ const Payments = () => {
 
       {isLoading && <Loader />}
 
-      {!isLoading && data.length > 0 && (
+      {!isLoading && data.length > 0 ? (
         <div>
           <div className="container mx-auto p-4">
             <table className="table-auto w-full">
@@ -311,6 +312,7 @@ const Payments = () => {
                     <td className="text-center">
                       <select
                         name="collectorId"
+                        disabled={!item.isEditable}
                         value={
                           item.lastCollection
                             ? item.lastCollection?.collectorId
@@ -356,7 +358,7 @@ const Payments = () => {
                           style={{ width: '140px' }}
                           name="amount"
                           value={item.collection}
-                          disabled={!allowSave()}
+                          disabled={!item.isEditable || !allowSave()}
                           onFocus={(e) => e.target.select()}
                           onChange={(e) => {
                             const value = +e.target.value;
@@ -422,6 +424,8 @@ const Payments = () => {
             </table>
           </div>
         </div>
+      ) : (
+        <div className="w-40 p-4">No loans available</div>
       )}
     </>
   );

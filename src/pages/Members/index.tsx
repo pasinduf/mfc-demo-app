@@ -223,7 +223,7 @@ const Members = () => {
                               <div className="flex items-center space-x-3.5">
                                 {allowEdit() && (
                                   <PencilSquareIcon
-                                    className="w-6 cursor-pointer"
+                                    className="w-5 cursor-pointer"
                                     onClick={() => onSelectMember(member)}
                                   />
                                 )}

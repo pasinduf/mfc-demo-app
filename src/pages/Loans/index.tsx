@@ -417,7 +417,7 @@ const Loans = () => {
                               {allowEdit(loan) && (
                                 <button>
                                   <PencilSquareIcon
-                                    className="w-6 cursor-pointer"
+                                    className="w-5 cursor-pointer"
                                     onClick={() => onSelectLoan(loan.id)}
                                   />
                                 </button>

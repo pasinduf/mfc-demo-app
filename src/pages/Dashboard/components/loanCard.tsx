@@ -28,7 +28,7 @@ const LoanCard = ({ type, loan, onExpand,openAddPayment }: Props) => {
           <h4 className="text-title-sm font-bold text-black dark:text-white break-words">
             {`${loan.member?.firstName} ${loan.member?.lastName}`}
           </h4>
-          <span className="text-sm font-medium block break-words">
+          <span className="text-sm font-semibold block break-words ">
             {loan.center}
           </span>
         </div>
@@ -43,7 +43,7 @@ const LoanCard = ({ type, loan, onExpand,openAddPayment }: Props) => {
           )}
           {!loan.isDayEnd && type === 'daily' && loan.isDailyCollected && (
             <PencilSquareIcon
-              className="w-6 cursor-pointer"
+              className="w-5 cursor-pointer"
               onClick={() => openAddPayment(loan)}
             />
           )}

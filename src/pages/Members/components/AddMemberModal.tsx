@@ -273,6 +273,7 @@ const AddMemberModal = ({
                       <label className="text-sm text-black font-semibold ">
                         Code
                       </label>
+                      <span className='ml-2 text-sm'>(Branch Code/Center Code/Memeber Code)</span>
                       <Input
                         type="text"
                         name="dob"

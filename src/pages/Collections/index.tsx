@@ -296,7 +296,7 @@ const Collections = () => {
                 (data.length ? (
                   data.map((group, i) => (
                     <div key={i} className="mb-4">
-                      <h4 className="text-md font-bold text-black dark:text-white pb-2">
+                      <h4 className="text-md font-bold text-black dark:text-white">
                         {group.date}
                       </h4>
 

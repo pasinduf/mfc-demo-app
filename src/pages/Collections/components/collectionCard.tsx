@@ -15,20 +15,18 @@ const CollectionCard = ({ collection }: Props) => {
             {getTime(collection.createdDate)}
           </span>
 
-          <h4 className="text-title-xsm text-black dark:text-white font-semibold break-words">
+          <span className="text-title-xsm text-gray-500 dark:text-white font-semibold break-words">
             {collection.loan.memberName}
-          </h4>
+          </span>
         </div>
 
-        {/* Amount (always right) */}
         <div className="text-right flex-shrink-0 sm:min-w-[120px]">
-          <h4 className="text-title-xs text-black dark:text-white font-semibold">
+          <h4 className="text-title-xs text-gray-500 dark:text-white font-semibold">
             {Number(collection.amount).toFixed(2)}
           </h4>
         </div>
       </div>
 
-      {/* Center Name (always below, left-aligned) */}
       <div className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-300 break-words">
         {collection.loan.centerName}
       </div>

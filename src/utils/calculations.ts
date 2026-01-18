@@ -47,7 +47,7 @@ export const getArrears = (
       break;
   }
 
-  const datesMargin = Math.floor(dateDiff / devideValue);
+  const datesMargin = dateDiff != 0 ? Math.floor(dateDiff / devideValue): 1;
   const calculatedArrears = prevArrearsAmount + (installment * datesMargin - collectionAmount);
 
   const arrears =
@@ -55,7 +55,7 @@ export const getArrears = (
       ? balance - collectionAmount
       : calculatedArrears;
 
-      return arrears;
+  return arrears;
 };
 
 
