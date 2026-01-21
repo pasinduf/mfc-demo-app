@@ -18,6 +18,8 @@ import { createUser } from '../../../api/user/createUser';
 import Checkbox from '../../../components/Checkbox';
 import { useAuth } from '../../../hooks/useAuth';
 import { Edit_User_Access } from '../../../api/RBAC/userAccess';
+import { set } from 'date-fns';
+import { it } from 'node:test';
 
 interface Props {
   open: boolean;
@@ -41,6 +43,7 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
   
   const [showPassword, setShowPassword] = useState(false);
   const [allAccessList, setAllAccessList] = useState(accessList);
+  const [allSelected, setAllSelected] = useState(false);
 
   const allowEditAccess = () => {
     return auth?.access?.includes(Edit_User_Access);
@@ -87,9 +90,12 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
   }; 
 
 
+  
+
+
   return (
     <Modal
-      size='large'
+      size="large"
       isOpen={open}
       setIsOpen={onClose}
       title={`${user && user?.id > 0 ? 'Update' : 'Add new'} user`}
@@ -493,12 +499,41 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
 
                     <div className="mt-6">
                       <div>
-                        <label className="text-sm text-black font-semibold">
-                          Permissions
-                        </label>
+                        <span>
+                          <label className="text-sm text-black font-semibold">
+                            Permissions
+                          </label>
+                          <Checkbox
+                            label="Select All"
+                            isChecked={allSelected}
+                            onChange={(value) =>{
+                               setAllSelected(value);
+                               const filterdList = allAccessList.filter(
+                                 (x: any) => x.category !== 'Dashboard',
+                               );
+                               let idList: any = [];
+                                
+                               if (value) {
+                                 idList = filterdList.flatMap((item: any) =>
+                                   item.access.map((access: any) => access.id),
+                                 );
+                               }
+                               setFieldValue('access', idList);
+                               setAllAccessList((prevData: any) =>
+                                  prevData.map((category: any) => ({
+                                    ...category,
+                                    access: category.access.map((item: any) => ({
+                                      ...item,
+                                      isChecked:value
+                                    })),
+                                  })),
+                                );
+                            }}
+                          />
+                        </span>
                       </div>
 
-                      <div className="mt-3">
+                      <div className="mt-4">
                         {allAccessList
                           .filter((x: any) => x.category != 'Dashboard')
                           .map((item: any, categoryIndex: number) => {
