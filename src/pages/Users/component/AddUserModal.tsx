@@ -45,9 +45,6 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
   const [allAccessList, setAllAccessList] = useState(accessList);
   const [allSelected, setAllSelected] = useState(false);
 
-
-  console.log('accessList',accessList);
-
   const allowEditAccess = () => {
     return auth?.access?.includes(Edit_User_Access);
   };
