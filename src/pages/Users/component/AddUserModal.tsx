@@ -47,6 +47,9 @@ const AddUserModal = ({ open, accessList,onClose, onRefresh, user }: Props) => {
   };
 
 
+  console.log('accessList',accessList);
+
+
   useEffect(()=>{
     if(user && user.id >0){
         setAllAccessList((prevData: any) =>
