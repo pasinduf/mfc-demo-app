@@ -152,12 +152,14 @@ export const MoerInfo = ({ user }: Props) => {
                   <label className="block text-sm font-medium text-black">
                     Centers
                   </label>
-                  <MultiselectDropdown
-                    options={centerOptions}
-                    selectedOptions={centers}
-                    onSelectOptions={(values) => {}}
-                    disabled
-                  />
+                  <ul className="flex flex-wrap gap-2">
+                    {centerOptions.map((center: any, index: number) => (
+                      <li key={index} className="flex items-center">
+                        <span className="mr-2">•</span>
+                        {center.name}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </div>

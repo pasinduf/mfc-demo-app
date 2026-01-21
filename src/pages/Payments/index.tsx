@@ -425,7 +425,7 @@ const Payments = () => {
           </div>
         </div>
       ) : (
-        <div className="w-40 p-4">No loans available</div>
+        <div className="w-40 p-4">No data available</div>
       )}
     </>
   );
